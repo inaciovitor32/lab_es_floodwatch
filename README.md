@@ -1,50 +1,94 @@
-# Welcome to your Expo app 👋
+# Floodwatch
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Projeto de conclusão para o curso de Lab. de Engenharia de Software Q1 - 2025 ministrado pela Prof.ª Dr.ª Juliana Braga.
 
-## Get started
+__APLICATIVO FINALIZADO PARA ANDROID:__ https://drive.google.com/file/d/1-qHFB0P6pD8TQzkF91E6HSKf9VI-muJP/view?usp=drive_link
 
-1. Install dependencies
+__Expo Go API Ver. 52 para testar builds feitos pelo desenvolvedor:__ https://drive.google.com/file/d/1-hnoENMHycb80JEVxZrHVBH5b8qdz01B/view?usp=drive_link
 
-   ```bash
-   npm install
-   ```
+## Sobre o projeto
 
-2. Start the app
+O Floodwatch é um aplicativo móvel desenvolvido para dispositivos Android, com o objetivo principal de permitir que os usuários registrem e consultem ocorrências de alagamentos em suas regiões. Além disso, o app também permite relatar e visualizar outros eventos relacionados a chuvas intensas, como enxurradas, deslizamentos de terra, desmoronamentos, danos à rede elétrica e quedas de árvores.
 
-   ```bash
-    npx expo start
-   ```
+A proposta central da ferramenta é funcionar como um recurso colaborativo, oferecendo à população meios práticos para prevenir e se proteger dos efeitos negativos de chuvas intensas. O aplicativo também tem a função de armazenar, de forma organizada, os relatos enviados pelos cidadãos, formando um histórico de informações que pode ser utilizado por órgãos públicos e prefeituras para monitoramento e planejamento de ações preventivas.
 
-In the output, you'll find options to open the app in a
+## Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Frontend:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+* React Native – Framework para desenvolvimento mobile multiplataforma.
+* Expo – Ferramenta que simplifica o desenvolvimento e o acesso a APIs nativas no React Native.
 
-## Get a fresh project
+### Geolocalização e Mapas:
 
-When you're ready, run:
+* API de Geolocalização do dispositivo – Para obter a localização exata dos relatos.
+* Google Maps API – Para visualização interativa dos pontos no mapa.
 
-```bash
-npm run reset-project
+### Backend (BaaS):
+
+* Firebase – Armazenamento em nuvem dos reportes e sincronização em tempo real.
+
+### Dados Meteorológicos:
+
+* Open-Meteo API – Fornecimento de informações climáticas e previsões do tempo.
+
+## Instruções
+
+### Preparando o projeto
+
+Criar uma conta gratuita na Google Cloud Platform (GCP)
+
+Acessar a plataforma do Firebase e inicializar o serviço Cloud Firestore (https://console.firebase.google.com/) criando um novo projeto
+
+Obter o objeto de configuração da plataforma:
+
+Exemplo:
+```
+const firebaseConfig = {
+  apiKey: "SUA_CHAVE_DE_API",
+  authDomain: "SEU_DOMÍNIO",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_STORAGE_BUCKET",
+  messagingSenderId: "SEU_ID",
+  appId: "SEU_APP_ID"
+};
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Inserir o objeto de configuração na linha 5 do arquivo ___firebaseConfig.ts___
 
-## Learn more
+Acessar ainda na GCP a plataforma do Google Maps (https://console.cloud.google.com/google/maps-apis), criar um novo projeto ativar a API para as plataformas Android e Web
 
-To learn more about developing your project with Expo, look at the following resources:
+Fazer o download do arquivo ___google-services.json___ e inserir na raíz do projeto
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Inseir a chave de API para o serviço do Google Maps para a plataforma Android em ___app.json___:
 
-## Join the community
+```
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_API_KEY"
+        }
+      },
+```
 
-Join our community of developers creating universal apps.
+## Inciando
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Com o Node JS LTS instalado, rodar o comando no terminal na raíz do projeto:
+```
+npm install
+```
+Aguardar a instalação das dependências do projeto...
+
+## Testando o projeto em um dispositivo móvel
+
+No terminal na raiz do projeto, rodar o seguinte comando:
+```
+npx expo start --tunnel
+```
+Quando o processo for concluído, digitar s
+
+Istalar o Expo Go no dispositivo Android através do apk fornecido
+
+Com o dispositivo Android, escanear o QR CODE que aparece no terminal, isso abrirá uma página da Web, selecione a opção para carregar o projeto no Expo Go
+
+Pronto! O projeto será carregado e você já pode testá-lo em seu dispositivo Android
